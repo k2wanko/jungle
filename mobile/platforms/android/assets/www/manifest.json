@@ -1,0 +1,1 @@
+{"app":{"background":{"scripts":["bootstrap.js"]}},"description":"Simple one touch game.","permissions":["storage","unlimitedStorage","syncFileSystem"],"name":"jungle","version":"0.0.1","manifest_version":2,"packageId":"com.djungarians.jungle","versionCode":1,"CFBundleVersion":"1.1.1"}
