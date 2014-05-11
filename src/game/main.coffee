@@ -1,0 +1,4 @@
+
+main = ->
+  @pushScene new StartScene
+    
