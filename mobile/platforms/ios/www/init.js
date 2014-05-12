@@ -1,0 +1,4 @@
+(function() {
+  enchant();
+
+}).call(this);
