@@ -1,4 +1,6 @@
 
 main = ->
-  @pushScene new StartScene
+  console.log @
+  @stages = []
+  @pushScene @startScene = new StartScene
     
