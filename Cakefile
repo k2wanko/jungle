@@ -32,7 +32,7 @@ toExt = (base, ext)->
 getList = (reg)->
   list = []
   for f in fs.readdirSync src_dir
-    list.push f if reg.test f
+    list.push f if reg.test f and !/^\.#/.test f
   return list
   
 task 'build', 'project build.', (o)->
@@ -52,10 +52,13 @@ task 'watch', 'file watch.', (o)->
   
   watch.createMonitor src_dir, (monitor)->
     monitor.on 'created', (f, stat)->
+      return if /^\.#/.test path.basename(f)
       console.log 'created'.yellow, f
       invoke 'build'
       
     monitor.on 'changed', (f, curr, prev)->
+      return if /^\.#/.test f
+      
       console.log 'changed'.green, f
 
       #manifest compile
@@ -68,6 +71,7 @@ task 'watch', 'file watch.', (o)->
       invoke 'js' if /\.coffee$/.test f
       
     monitor.on 'removed', (f, stat)->
+      return if /^\.#/.test f
       console.log 'removed'.red, f
       #invoke 'build' 
 
@@ -113,7 +117,7 @@ task "js", "js build (#{src_dir}/*.coffee to #{app_dir}/*.js)", (o)->
       @dist_name = path.join app_dir, toExt coffeeFile, '.js'
 
       snockets.getCompiledChain @src_name, (err, jsList) =>
-        return console.error err if err
+        #return console.error err if err
         compileFlag = false
         list = []
         for js in jsList
