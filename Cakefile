@@ -43,6 +43,34 @@ task 'build', 'project build.', (o)->
 task 'clean', 'dist clean', (o)->
   exec "rm -rf #{app_dir}/manifest.json #{app_dir}/*.js #{app_dir}/*.html"
 
+task 'watch', 'file watch.', (o)->
+
+  invoke 'build'
+      
+  watch = require 'watch'
+  colors = require 'colors'
+  
+  watch.createMonitor src_dir, (monitor)->
+    monitor.on 'created', (f, stat)->
+      console.log 'created'.yellow, f
+      invoke 'build'
+      
+    monitor.on 'changed', (f, curr, prev)->
+      console.log 'changed'.green, f
+
+      #manifest compile
+      invoke 'manifest' if  manifest_yml is path.basename(f)
+
+      #html compile
+      invoke 'html' if /\.jade$/.test f
+
+      #js compile
+      invoke 'js' if /\.coffee$/.test f
+      
+    monitor.on 'removed', (f, stat)->
+      console.log 'removed'.red, f
+      #invoke 'build' 
+
 task 'manifest', "manifest build (yaml to json)", (o)->
   yaml = require 'js-yaml'
   src_name = path.join src_dir, manifest_yml
