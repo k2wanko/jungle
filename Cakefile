@@ -52,7 +52,7 @@ task 'watch', 'file watch.', (o)->
   
   watch.createMonitor src_dir, (monitor)->
     monitor.on 'created', (f, stat)->
-      return if /^\.#/.test f
+      return if /^\.#/.test path.basename(f)
       console.log 'created'.yellow, f
       invoke 'build'
       
