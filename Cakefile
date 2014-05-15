@@ -32,7 +32,7 @@ toExt = (base, ext)->
 getList = (reg)->
   list = []
   for f in fs.readdirSync src_dir
-    list.push f if reg.test f and !/^\.#/.test f
+    list.push f if reg.test f 
   return list
   
 task 'build', 'project build.', (o)->
