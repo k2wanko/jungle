@@ -31,7 +31,7 @@ module.exports = (grunt)->
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.registerTask 'js', 'coffee compile', -> exec "cake js"
-  grunt.registerTask 'html', 'html compile', -> exec "cake js"
-  grunt.registerTask 'manifest', 'manifest compile', -> exec "cake js"
+  grunt.registerTask 'html', 'html compile', -> exec "cake html"
+  grunt.registerTask 'manifest', 'manifest compile', -> exec "cake manifest"
 
   return
