@@ -8,9 +8,12 @@ class Stage extends Scene
     
     @world = new PhysicsWorld @gravityX, @gravityY
     
-    @onenterframe = => @world.step core.fps
+    @onenterframe = => 
+      @world.step core.fps
+      @onPhysicsFrame()
+
 
     console.log "on Stage", core.stages
       
-    
+  onPhysicsFrame: ->
     

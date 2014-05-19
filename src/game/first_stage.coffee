@@ -11,4 +11,7 @@ class FirstStage extends Stage
     @onenterframe = => @world.step core.fps
 
     console.log "on Stage", core.stages
+
+  onPhysicsFrame: -> 
+  	console.log "first stage"
       
