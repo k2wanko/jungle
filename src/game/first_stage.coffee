@@ -1,4 +1,4 @@
-
+#= require stage.coffee
 
 class FirstStage extends Stage
   constructor: (@gravityX, @gravityY = 9.8)->
