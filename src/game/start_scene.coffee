@@ -6,7 +6,7 @@ class StartScene extends Scene
     
     @backgroundColor = "green"
 
-    core.stages.push new Stage
+    core.stages.push new FirstStage
 
     console.log core
     
