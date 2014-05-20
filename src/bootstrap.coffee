@@ -3,7 +3,11 @@ chrome.app.runtime.onLaunched.addListener ->
   height = 640
   chrome.app.window.create "index.html",
     id: "jungle2014511"    
-    #"frame": "none",
+    #"frame": "none"
+    minWidth: width
+    minHeight: height
+    maxWidth: width
+    maxHeight: height
     bounds:
       width: width
       height: height
