@@ -6,6 +6,8 @@ class StartScene extends Scene
 
     @background = new Sprite 0, 0
     
+    @backgroundColor = "green"
+
     @addChild @background
 
     @background.backgroundColor = "blue"
@@ -13,8 +15,4 @@ class StartScene extends Scene
     @background.width = core.width
 
     @background.height = core.height
-
-    core.stages.push new Stage
-
-    console.log core
     
