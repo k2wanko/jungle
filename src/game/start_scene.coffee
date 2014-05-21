@@ -3,10 +3,16 @@ class StartScene extends Scene
     super
 
     core = enchant.Core.instance
+
+    @background = new Sprite 0, 0
     
     @backgroundColor = "green"
 
-    core.stages.push new Stage
+    @addChild @background
 
-    console.log core
+    @background.backgroundColor = "blue"
+
+    @background.width = core.width
+
+    @background.height = core.height
     

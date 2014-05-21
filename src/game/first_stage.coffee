@@ -1,6 +1,6 @@
+#= require stage.coffee
 
-
-class Stage extends Scene
+class FirstStage extends Stage
   constructor: (@gravityX, @gravityY = 9.8)->
     super
     
@@ -8,12 +8,10 @@ class Stage extends Scene
     
     @world = new PhysicsWorld @gravityX, @gravityY
     
-    @onenterframe = => 
-      @world.step core.fps
-      @onPhysicsFrame()
-
+    @onenterframe = => @world.step core.fps
 
     console.log "on Stage", core.stages
+
+  onPhysicsFrame: -> 
+  	console.log "first stage"
       
-  onPhysicsFrame: ->
-    
