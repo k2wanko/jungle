@@ -1,6 +1,8 @@
 node_modules
 .cake_task_cache
 mobile/
+assets_work/
+
 
 #app dir
 app/manifest.json
