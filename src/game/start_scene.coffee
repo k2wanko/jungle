@@ -8,11 +8,24 @@ class StartScene extends Scene
     
     @backgroundColor = "green"
 
+    @start_button = new Sprite 0, 0
+
     @addChild @background
+
+    @addChild @start_button
 
     @background.backgroundColor = "#55DFFF"
 
     @background.width = core.width
 
     @background.height = core.height
+
+    @start_button.backgroundColor = "red"
+
+    @start_button.width = 100
+
+    @start_button.height = 50
+
+    
+
     
