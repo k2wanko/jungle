@@ -10,7 +10,7 @@ class StartScene extends Scene
 
     @addChild @background
 
-    @background.backgroundColor = "blue"
+    @background.backgroundColor = "#55DFFF"
 
     @background.width = core.width
 
