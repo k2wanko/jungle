@@ -1,4 +1,4 @@
-#= require ui.coffee
+#= require ui.coffee background.coffee
 
 
 class Director
@@ -7,6 +7,7 @@ class Director
 
     game = null
     ui = null
+    background = null
     
     start: ->
       #@getGame().loadingScene = new LoadingScene
@@ -30,6 +31,9 @@ class Director
 
     getUI: ->
       ui = if ui? then ui else new UI
+
+    getBackground: ->
+      background = if background? then background else new Background
 
     constructor: ->
       
