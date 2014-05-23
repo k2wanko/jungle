@@ -42,16 +42,11 @@ class Background extends Group
   constructor: ->
     super
 
+    @backgroundColor = "#55DFFF"
+
     @addChild @base = new Background.Base
     
-    @addChild @clouds = new Group
-
-    for i in [0...7]
-      @clouds.addChild cloud = new Cloud
-
-    @onenterframe = =>
-      @base.x = @x
-      @base.y = @y
-
-      @clouds.y = @x
-      @clouds.y = @y
+    #@addChild @clouds = new Group
+    #
+    #for i in [0...7]
+    #  @clouds.addChild cloud = new Cloud
