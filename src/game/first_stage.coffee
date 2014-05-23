@@ -57,15 +57,15 @@ class FirstStage extends Stage
     @main_past_x = 100
     
     #画像の描写
-    @addChild(@floor_a)
-    @addChild(@floor_b)
-    @addChild(@main_char)
-    @addChild(@parameter_base_sprite)
-    @addChild(@parameter_move_sprite)
+    @scene.addChild(@floor_a)
+    @scene.addChild(@floor_b)
+    @scene.addChild(@main_char)
+    @scene.addChild(@parameter_base_sprite)
+    @scene.addChild(@parameter_move_sprite)
     console.log(@scene.x)
 
     #画面をタッチされた時の反応
-    @scene.on "touchstart", (e) ->
+    @on "touchstart", (e) ->
       if @touchcount == 0
         @main_char.applyImpulse new b2Vec2(20, 30)
         @touchcount++
