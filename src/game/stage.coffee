@@ -5,15 +5,19 @@ class Stage extends Scene
     super
     
     core = enchant.Core.instance
-    
-    @world = new PhysicsWorld @gravityX, @gravityY
-    
-    @onenterframe = => 
-      @world.step core.fps
-      @onPhysicsFrame()
 
+    self = @
 
-    console.log "on Stage", core.stages
+    @scene = new class extends Scene
+      constructor: ->
+        super
+        @world = new PhysicsWorld self.gravityX, self.gravityY
+
+        @onenterframe = =>
+          @world.step core.fps
+          self.onPhysicsFrame()
+
+    @addChild @scene
       
   onPhysicsFrame: ->
     
