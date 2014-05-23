@@ -68,7 +68,7 @@ class FirstStage extends Stage
     console.log(@scene.x)
 
     #画面をタッチされた時の反応
-    @on "touchstart", (e) =>
+    @scene.shoot_button.on "touchstart", (e) =>
       if @touchcount == 0
         @main_char.applyImpulse new b2Vec2(20, 30)
         @touchcount++
