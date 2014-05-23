@@ -26,6 +26,11 @@ class StartScene extends Scene
 
     @start_button.height = 50
 
+    @start_button.addEventListener 'touchend', ->
+      first_stage = new FirstStage
+      core.stages.push first_stage
+      core.replaceScene first_stage
+
     
 
     
