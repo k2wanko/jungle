@@ -22,9 +22,9 @@ class StartScene extends Scene
 
     @start_button.image = core.assets['start_button']
 
-    #@start_button.width = 100
-
-    #@start_button.height = 50
+    @start_button.x = (core.width/2) - (@start_button.width/2)
+    @start_button.y = (core.height/2) - (@start_button.height/2)
+    console.log @start_button
 
     @start_button.addEventListener 'touchend', ->
       first_stage = new FirstStage
