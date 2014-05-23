@@ -1,9 +1,12 @@
+#= require ui.coffee
+
 
 class Director
 
   _Director = class Director
 
     game = null
+    ui = null
     
     start: ->
       #@getGame().loadingScene = new LoadingScene
@@ -24,6 +27,9 @@ class Director
 
     getHeight: ->
       @getWidth()
+
+    getUI: ->
+      ui = if ui? then ui else new UI
 
     constructor: ->
       

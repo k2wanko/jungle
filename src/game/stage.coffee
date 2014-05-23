@@ -19,7 +19,7 @@ class Stage extends Scene
 
     @addChild @scene
 
-    @addChild @ui = Director.getInstance()
+    @addChild @ui = Director.getInstance().getUI()
       
   onPhysicsFrame: ->
     
