@@ -8,6 +8,7 @@ class FirstStage extends Stage
 
     @touchcount = 0
     @main_past_x = 0
+    @main_past_y = 0
     @param_y = 0
     
     console.log "firstStage"
@@ -25,32 +26,7 @@ class FirstStage extends Stage
     @floor_b.position = 
       x : @width * 2 - @width / 2
       y : @height - 20 / 2
-    #飛ぶ強さを決めるパラメーターの軸の部分  
-    @parameter_base_sprite = new Sprite(10,100)
-    @parameter_base_surface = new Surface(10,100)
-    @parameter_base_surface.context.fillStyle = "red"
-    @parameter_base_surface.context.fillRect 0, 0, 10, 100
-    @parameter_base_sprite.x = 20
-    @parameter_base_sprite.y = 10
-    @parameter_base_sprite.image = @parameter_base_surface
-    
-    #飛ぶ強さを決めるパラメーターの動く部分
-    @parameter_move_sprite = new Sprite(30,5)
-    @parameter_move_surface = new Surface(30, 5)
-    @parameter_move_surface.context.fillStyle = "yellow"
-    @parameter_move_surface.context.fillRect 0, 0, 30, 5
-    @parameter_move_sprite.x = 10
-    @parameter_move_sprite.y = 11
-    @parameter_move_sprite.image = @parameter_move_surface
-
-
-    # main_char = new enchant.box2d.PhyCircleSprite(16,enchant.box2d.DYNAMIC_SPRITE,0.8,100.5,0.2,true)
-    # main_char.image = core.assets['chara']
-    # main_char.frame = 0
-    # main_char.position =
-    #   x : 40
-    #   y : 40
-    #メインキャラの生成
+    #メインキャラクター
     @main_char = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.DYNAMIC_SPRITE,0.8,0.3,0.2,true)
     @main_char.image = core.assets['chara']
     @main_char.frame = 0
@@ -58,42 +34,55 @@ class FirstStage extends Stage
       x : 40
       y : 40
     @main_past_x = 100
-    
+    @main_past_y = 200
+
+    #敵キャラ１
+    @enemy_charA = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
+    @enemy_charA.image = core.assets['chara']
+    @enemy_charA.frame = 8
+    @enemy_charA.position = 
+      x : 300
+      y : 150
+    @enemy_charB = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
+    @enemy_charB.image = core.assets['chara']
+    @enemy_charB.frame = 10
+    @enemy_charB.position = 
+      x : core.width * 3 / 4
+      y : core.height * 3 / 4
+     
     #画像の描写
     @scene.addChild(@floor_a)
     @scene.addChild(@floor_b)
     @scene.addChild(@main_char)
-    @scene.addChild(@parameter_base_sprite)
-    @scene.addChild(@parameter_move_sprite)
+    @scene.addChild(@enemy_charA)
+    @scene.addChild(@enemy_charB)
     console.log(@scene.x)
-
+    
+    load = 5
     #画面をタッチされた時の反応
     @on "touchstart", (e) =>
-      if @touchcount == 0
-        @main_char.applyImpulse new b2Vec2(20, 30)
-        @touchcount++
-        @ui.restart_button.visible = true
-    # @onPhysicsFrame = ->
-    #   if main_char.x >= 100
-    #     @scene.x -= (main_char.x - main_past_x)
-    #     main_past_x = main_char.x
-    #   if parameter_move_sprite.y >= 100
-    #     param_y = -1
-    #   else if parameter_move_sprite.y <= 12
-    #     param_y = 1
-    #   parameter_move_sprite.y += param_y
-    #   return 0
+      if @touchcount == 0 
+         @floor_a.contact (sprite)=>
+            if sprite == @main_char
+              console.log("vecX : " + (e.x - sprite.x))
+              console.log("vecY : " + (sprite.y - e.y))
+              console.log("sceneX : " + @scene.x)
+              sprite.applyImpulse new b2Vec2((e.x - sprite.x) / load, (sprite.y - e.y) / load) 
+              @touchcount++
+              @ui.restart_button.visible = true
     
   #フレームごとの処理
   onPhysicsFrame: ->
   	if @main_char.x >= 100
       @scene.x -= (@main_char.x - @main_past_x)
       @main_past_x = @main_char.x
-    if @parameter_move_sprite.y >= 100
-      @param_y = -1
-    else if @parameter_move_sprite.y <= 12
-      @param_y = 1
-    @parameter_move_sprite.y += @param_y
+    if @main_char.y <= 200
+      @scene.y -= (@main_char.y - @main_past_y)
+      @main_past_y = @main_char.y
+    #console.log (@scene.x)
+   # console.log(@scene.y)
+    # console.log("vX : " + @main_char.vx)
+    # console.log("vY : " + @main_char.vy)
     return 0
   
   

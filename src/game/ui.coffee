@@ -29,5 +29,4 @@ class UI extends Group
           return
         
     @restart_button.addEventListener 'touchstart', =>
-      console.log 'restart'
       @restart_button.restart()

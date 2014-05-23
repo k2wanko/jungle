@@ -14,7 +14,6 @@ class Stage extends Scene
       constructor: ->
         super
         @world = new PhysicsWorld self.gravityX, self.gravityY
-
         @onenterframe = =>
           @world.step core.fps
           self.onPhysicsFrame()
@@ -24,6 +23,6 @@ class Stage extends Scene
     @addChild @scene
 
     @addChild @ui = Director.getInstance().getUI()
+
       
   onPhysicsFrame: ->
-    
