@@ -4,6 +4,8 @@ class FirstStage extends Stage
   constructor: (@gravityX, @gravityY = 9.8)->
     super
 
+    @ui.restart_button.stage = FirstStage
+
     @touchcount = 0
     @main_past_x = 0
     @param_y = 0
