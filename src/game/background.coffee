@@ -44,8 +44,14 @@ class Background extends Group
 
     @addChild @base = new Background.Base
     
-    @clouds = []
+    @addChild @clouds = new Group
 
     for i in [0...7]
-      @clouds.push cloud = new Cloud
-      @addChild cloud
+      @clouds.addChild cloud = new Cloud
+
+    @onenterframe = =>
+      @base.x = @x
+      @base.y = @y
+
+      @clouds.y = @x
+      @clouds.y = @y

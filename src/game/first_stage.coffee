@@ -9,7 +9,7 @@ class FirstStage extends Stage
     @touchcount = 0
     @main_past_x = 0
     @param_y = 0
-    @backgroundColor = "blue"
+    
     console.log "firstStage"
     core = enchant.Core.instance
 

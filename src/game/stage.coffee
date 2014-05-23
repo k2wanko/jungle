@@ -8,6 +8,8 @@ class Stage extends Scene
 
     self = @
 
+    @addChild @background = Director.getInstance().getBackground()
+
     @scene = new class extends Scene
       constructor: ->
         super
@@ -16,6 +18,8 @@ class Stage extends Scene
         @onenterframe = =>
           @world.step core.fps
           self.onPhysicsFrame()
+          self.background.base.x = @x
+          
 
     @addChild @scene
 
