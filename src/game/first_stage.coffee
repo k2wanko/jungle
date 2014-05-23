@@ -3,6 +3,7 @@
 class FirstStage extends Stage
   constructor: (@gravityX, @gravityY = 9.8)->
     super
+
     @touchcount = 0
     @main_past_x = 0
     @param_y = 0
@@ -65,10 +66,11 @@ class FirstStage extends Stage
     console.log(@scene.x)
 
     #画面をタッチされた時の反応
-    @on "touchstart", (e) ->
+    @on "touchstart", (e) =>
       if @touchcount == 0
         @main_char.applyImpulse new b2Vec2(20, 30)
         @touchcount++
+        @ui.restart_button.visible = true
     # @onPhysicsFrame = ->
     #   if main_char.x >= 100
     #     @scene.x -= (main_char.x - main_past_x)
@@ -83,13 +85,13 @@ class FirstStage extends Stage
   #フレームごとの処理
   onPhysicsFrame: ->
   	if @main_char.x >= 100
-        @scene.x -= (@main_char.x - @main_past_x)
-        @main_past_x = @main_char.x
-      if @parameter_move_sprite.y >= 100
-        @param_y = -1
-      else if @parameter_move_sprite.y <= 12
-        @param_y = 1
-      @parameter_move_sprite.y += @param_y
-      return 0
+      @scene.x -= (@main_char.x - @main_past_x)
+      @main_past_x = @main_char.x
+    if @parameter_move_sprite.y >= 100
+      @param_y = -1
+    else if @parameter_move_sprite.y <= 12
+      @param_y = 1
+    @parameter_move_sprite.y += @param_y
+    return 0
   
   
