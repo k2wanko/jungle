@@ -2,5 +2,5 @@
 main = ->
   console.log @
   @stages = []
-  @pushScene @startScene = new StartScene
+  @pushScene @startScene = new FirstStage
     
