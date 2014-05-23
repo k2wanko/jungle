@@ -10,16 +10,19 @@ class FirstStage extends Stage
     console.log "firstStage"
     core = enchant.Core.instance
 
+    #床の一つ目
     @floor_a = new enchant.box2d.PhyBoxSprite(@width, 20, enchant.box2d.STATIC_SPRITE, 1.5,0.3,0.0,true)
     @floor_a.backgroundColor = "#FF0"
     @floor_a.position = 
       x : @width - @width / 2
       y : @height - 20 / 2
+    #床の２つ目
     @floor_b = new enchant.box2d.PhyBoxSprite(@width, 20, enchant.box2d.STATIC_SPRITE, 1.5,0.3,0.0,true)
     @floor_b.backgroundColor = "#F2F"
     @floor_b.position = 
       x : @width * 2 - @width / 2
       y : @height - 20 / 2
+    #飛ぶ強さを決めるパラメーターの軸の部分  
     @parameter_base_sprite = new Sprite(10,100)
     @parameter_base_surface = new Surface(10,100)
     @parameter_base_surface.context.fillStyle = "red"
@@ -27,7 +30,8 @@ class FirstStage extends Stage
     @parameter_base_sprite.x = 20
     @parameter_base_sprite.y = 10
     @parameter_base_sprite.image = @parameter_base_surface
-
+    
+    #飛ぶ強さを決めるパラメーターの動く部分
     @parameter_move_sprite = new Sprite(30,5)
     @parameter_move_surface = new Surface(30, 5)
     @parameter_move_surface.context.fillStyle = "yellow"
@@ -43,6 +47,7 @@ class FirstStage extends Stage
     # main_char.position =
     #   x : 40
     #   y : 40
+    #メインキャラの生成
     @main_char = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.DYNAMIC_SPRITE,0.8,0.3,0.2,true)
     @main_char.image = core.assets['chara']
     @main_char.frame = 0
@@ -50,13 +55,16 @@ class FirstStage extends Stage
       x : 40
       y : 40
     @main_past_x = 100
-
+    
+    #画像の描写
     @addChild(@floor_a)
     @addChild(@floor_b)
     @addChild(@main_char)
     @addChild(@parameter_base_sprite)
     @addChild(@parameter_move_sprite)
     console.log(@scene.x)
+
+    #画面をタッチされた時の反応
     @scene.on "touchstart", (e) ->
       if @touchcount == 0
         @main_char.applyImpulse new b2Vec2(20, 30)
@@ -71,6 +79,8 @@ class FirstStage extends Stage
     #     param_y = 1
     #   parameter_move_sprite.y += param_y
     #   return 0
+    
+  #フレームごとの処理
   onPhysicsFrame: ->
   	if @main_char.x >= 100
         @scene.x -= (@main_char.x - @main_past_x)
