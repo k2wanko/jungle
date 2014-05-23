@@ -8,14 +8,25 @@ class StartScene extends Scene
     
     @backgroundColor = "green"
 
+    @start_button = new Sprite 0, 0
+
     @addChild @background
 
-    @background.backgroundColor = "blue"
+    @addChild @start_button
+
+    @background.backgroundColor = "#55DFFF"
 
     @background.width = core.width
 
     @background.height = core.height
 
-    core.stages.push first_stage = new FirstStage
+    @start_button.backgroundColor = "red"
 
-    core.replaceScene first_stage
+    @start_button.width = 100
+
+    @start_button.height = 50
+
+    @start_button.addEventListener 'touchend', ->
+      first_stage = new FirstStage
+      core.stages.push first_stage
+      core.replaceScene first_stage
