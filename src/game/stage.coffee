@@ -22,7 +22,7 @@ class Stage extends Scene
           @world.step core.fps
           self.onPhysicsFrame()
           self.background.base.x = @x
-          self.background.clouds.y = @y
+          #self.background.clouds.y = @y
           
 
     @addChild @scene
