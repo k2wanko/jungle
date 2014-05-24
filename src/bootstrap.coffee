@@ -1,6 +1,6 @@
 chrome.app.runtime.onLaunched.addListener ->
-  width = 1280 / 2
-  height = 768 / 2
+  width = Math.ceil(960 / 2)
+  height = Math.ceil(640 / 2)
   chrome.app.window.create "index.html",
     id: "jungle2014511"    
     #"frame": "none"
