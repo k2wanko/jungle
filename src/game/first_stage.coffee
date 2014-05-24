@@ -57,16 +57,17 @@ class FirstStage extends Stage
     @scene.addChild(@enemy_charA)
     @scene.addChild(@enemy_charB)
     console.log(@scene.x)
-    
+
+    @main_char.contact (sprite)=>
+      sprite.destroy()
+      console.log("enemy")    
     load = 5
     #画面をタッチされた時の反応
     @on "touchstart", (e) =>
       if @touchcount == 0 
-         @floor_a.contact (sprite)=>
+        console.log("sceneX : " + @scene.x)
+        @floor_a.contact (sprite)=>
             if sprite == @main_char
-              console.log("vecX : " + (e.x - sprite.x))
-              console.log("vecY : " + (sprite.y - e.y))
-              console.log("sceneX : " + @scene.x)
               sprite.applyImpulse new b2Vec2((e.x - sprite.x) / load, (sprite.y - e.y) / load) 
               @touchcount++
               @ui.restart_button.visible = true
@@ -79,10 +80,10 @@ class FirstStage extends Stage
     if @main_char.y <= 200
       @scene.y -= (@main_char.y - @main_past_y)
       @main_past_y = @main_char.y
-    #console.log (@scene.x)
-   # console.log(@scene.y)
-    # console.log("vX : " + @main_char.vx)
-    # console.log("vY : " + @main_char.vy)
-    return 0
+    if @scene.x * (-1) >= @floor_a.position.x + @width / 2
+      @floor_a.x = @floor_b.position.x + @width / 2
+    if @scene.x * (-1) >= @floor_b.position.x + @width / 2
+      @floor_b.x = @floor_a.position.x + @width / 2
+    
   
   
