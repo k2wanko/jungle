@@ -43,12 +43,15 @@ class FirstStage extends Stage
     @enemy_charA.position = 
       x : 300
       y : 150
+    @enemy_charA.body.m_isSensor = true
+    #敵キャラ２
     @enemy_charB = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
     @enemy_charB.image = core.assets['chara']
     @enemy_charB.frame = 10
     @enemy_charB.position = 
       x : core.width * 3 / 4
       y : core.height * 3 / 4
+    @enemy_charB.body.m_isSensor = true
      
     #画像の描写
     @scene.addChild(@floor_a)
@@ -56,11 +59,8 @@ class FirstStage extends Stage
     @scene.addChild(@main_char)
     @scene.addChild(@enemy_charA)
     @scene.addChild(@enemy_charB)
-    console.log(@scene.x)
 
-    @main_char.contact (sprite)=>
-      sprite.destroy()
-      console.log("enemy")    
+    
     load = 5
     #画面をタッチされた時の反応
     @on "touchstart", (e) =>
@@ -84,6 +84,7 @@ class FirstStage extends Stage
       @floor_a.x = @floor_b.position.x + @width / 2
     if @scene.x * (-1) >= @floor_b.position.x + @width / 2
       @floor_b.x = @floor_a.position.x + @width / 2
-    
-  
+    @main_char.contact (sprite)=>
+      if sprite != @floor_a and sprite != @floor_b
+        sprite.destroy()
   

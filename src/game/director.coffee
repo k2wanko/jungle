@@ -24,10 +24,10 @@ class Director
       return game
 
     getWidth: ->
-      960
+      480
 
     getHeight: ->
-      640
+      320
 
     getUI: ->
       ui = if ui? then ui else new UI
