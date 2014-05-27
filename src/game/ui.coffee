@@ -4,11 +4,10 @@ class UI extends Group
   constructor: ->
     super
     core = enchant.Core.instance
+    self = @
 
-    @addChild @life = new Sprite 300, 0
-    @life.width = @life.height = 100
-    @life.backgroundColor = "green"
-
+    #@addChild @life = new LifeLabel 10, 10, 5
+    @addChild @score_label = new ScoreLabel 10, 10
     
     @addChild @restart_button = new Sprite 100, 50
     @restart_button.x = core.width - @restart_button.width
