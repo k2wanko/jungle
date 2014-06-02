@@ -27,14 +27,15 @@ class FirstStage extends Stage
       x : @width * 2 - @width / 2
       y : @height - 20 / 2
     #メインキャラクター
-    @main_char = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.DYNAMIC_SPRITE,0.8,0.3,0.2,true)
-    @main_char.image = core.assets['chara']
+    @main_char = new enchant.PhyPolygonSprite(60,60,[new b2Vec2(10, 10), new b2Vec2(-10, 10), new b2Vec2(10, -10)], enchant.box2d.DYNAMIC_SPRITE, 1.0, 0.5, 0.3, true)
+    @main_char.image = core.assets['main_char']
     @main_char.frame = 0
     @main_char.position =
       x : 40
       y : 40
     @main_past_x = 100
     @main_past_y = 200
+    @main_char.scale 1, 1
 
     #敵キャラ１
     @enemy_charA = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
@@ -52,6 +53,15 @@ class FirstStage extends Stage
       x : core.width * 3 / 4
       y : core.height * 3 / 4
     @enemy_charB.body.m_isSensor = true
+
+    # @enemy_charC = new Enemy(0, 9.8);
+    # @enemy_charC.createPhyCircle(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
+    # @enemy_charC.image = core.assets['chara']
+    # @enemy_charC.position = 
+    #   x : 200
+    #   y : 300
+    # console.log(@enemy_charC)
+    # @scene.addChild(@enemy_charC)
      
     #画像の描写
     @scene.addChild(@floor_a)
@@ -59,9 +69,9 @@ class FirstStage extends Stage
     @scene.addChild(@main_char)
     @scene.addChild(@enemy_charA)
     @scene.addChild(@enemy_charB)
-
     
-    load = 5
+    
+    load = 1.7
     #画面をタッチされた時の反応
     @on "touchstart", (e) =>
       if @touchcount == 0 
@@ -81,7 +91,7 @@ class FirstStage extends Stage
       @scene.y -= (@main_char.y - @main_past_y)
       @main_past_y = @main_char.y
     if @scene.x * (-1) >= @floor_a.position.x + @width / 2
-      @floor_a.x = @floor_b.position.x + @width / 2
+      @floor_a.x = @floor_b.position.x + @width / 2 + 100
     if @scene.x * (-1) >= @floor_b.position.x + @width / 2
       @floor_b.x = @floor_a.position.x + @width / 2
     @main_char.contact (sprite)=>
