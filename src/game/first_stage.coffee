@@ -27,7 +27,7 @@ class FirstStage extends Stage
       x : @width * 2 - @width / 2
       y : @height - 20 / 2
     #メインキャラクター
-    @main_char = new enchant.PhyPolygonSprite(60,60,[new b2Vec2(10, 10), new b2Vec2(-10, 10), new b2Vec2(10, -10)], enchant.box2d.DYNAMIC_SPRITE, 1.0, 0.5, 0.3, true)
+    @main_char = new enchant.box2d.PhyBoxSprite(60,60,enchant.box2d.DYNAMIC_SPRITE,0.8,0.3,0.2,true)
     @main_char.image = core.assets['main_char']
     @main_char.frame = 0
     @main_char.position =
@@ -35,7 +35,7 @@ class FirstStage extends Stage
       y : 40
     @main_past_x = 100
     @main_past_y = 200
-    @main_char.scale 1, 1
+    @main_char.backgroundColor = "red"
 
     #敵キャラ１
     @enemy_charA = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
