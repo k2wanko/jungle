@@ -54,21 +54,23 @@ class FirstStage extends Stage
       @x += moveX
 
     #敵キャラ２
-    @enemy_charB = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
+    @enemy_charB = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.DYNAMIC_SPRITE,0.8,0.3,0.8,true)
     @enemy_charB.image = core.assets['chara']
     @enemy_charB.frame = 10
     @enemy_charB.position = 
-      x : core.width * 3 / 4
-      y : core.height * 3 / 4
-    @enemy_charB.body.m_isSensor = true
-    moveY = 1
-    @enemy_charB.addEventListener 'enterframe', ->
-      if @y >= 200
-        moveY = -1
-      else if @y <= 100
-        moveY = 1
-      @y += moveY
-     
+      x : 350
+      y : 250
+    @enemy_charB.body.m_isSensor = false
+    jump_count = 0
+    @enemy_charB.addEventListener 'enterframe' , =>
+      @enemy_charB.contact (sprite)=>
+        if sprite == @floor_a or sprite == @floor_b
+        
+          if jump_count >= 5
+            @enemy_charB.applyImpulse new b2Vec2(0,5)
+            jump_count = 0
+          jump_count += 1
+
     #画像の描写
     @scene.addChild(@floor_a)
     @scene.addChild(@floor_b)
@@ -102,5 +104,6 @@ class FirstStage extends Stage
       @floor_b.x = @floor_a.position.x + @width / 2
     @main_char.contact (sprite)=>
       if sprite != @floor_a and sprite != @floor_b
+        sprite.body.m_isSensor = true
         sprite.destroy()
   
