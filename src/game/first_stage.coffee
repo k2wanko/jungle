@@ -45,6 +45,14 @@ class FirstStage extends Stage
       x : 300
       y : 150
     @enemy_charA.body.m_isSensor = true
+    moveX = 1
+    @enemy_charA.addEventListener 'enterframe', ->
+      if @x >= 350
+        moveX = -1
+      else if @x <= 250
+        moveX = 1
+      @x += moveX
+
     #敵キャラ２
     @enemy_charB = new enchant.box2d.PhyBoxSprite(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
     @enemy_charB.image = core.assets['chara']
@@ -53,15 +61,13 @@ class FirstStage extends Stage
       x : core.width * 3 / 4
       y : core.height * 3 / 4
     @enemy_charB.body.m_isSensor = true
-
-    # @enemy_charC = new Enemy(0, 9.8);
-    # @enemy_charC.createPhyCircle(32,32,enchant.box2d.STATIC_SPRITE,0.8,0.3,0.2,true)
-    # @enemy_charC.image = core.assets['chara']
-    # @enemy_charC.position = 
-    #   x : 200
-    #   y : 300
-    # console.log(@enemy_charC)
-    # @scene.addChild(@enemy_charC)
+    moveY = 1
+    @enemy_charB.addEventListener 'enterframe', ->
+      if @y >= 200
+        moveY = -1
+      else if @y <= 100
+        moveY = 1
+      @y += moveY
      
     #画像の描写
     @scene.addChild(@floor_a)
