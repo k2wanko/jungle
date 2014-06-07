@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+require('coffee-script/register');
+
+var debug = require('debug')('server');
+
+var path = require('path');
+
+var app = require(path.join(__filename + '/../../app'));
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});

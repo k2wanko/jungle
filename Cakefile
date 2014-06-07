@@ -20,7 +20,7 @@ manifest_yml = "manifest.yml"
 fs = require 'fs'
 path = require 'path'
 
-{ exec } = require 'child_process'
+{ exec, spawn } = require 'child_process'
 
 isOld = (f1, f2)->
   return true unless fs.existsSync f1
@@ -131,6 +131,18 @@ task "js", "js build (#{src_dir}/*.coffee to #{app_dir}/*.js)", (o)->
           for file in list
             codeList.push fs.readFileSync file, 'utf8'
           fs.writeFile @dist_name, coffee.compile codeList.join "\n"
-    
+
+option '-p', '--port[V]', 'Server port'    
   
-  
+task 'server', (options)->
+  process.env.PORT = process.env.PORT || options.port || 3000
+  node = 'node'
+  server = spawn node, ['./server/bin/www']
+  server.stdout.on 'data', (data)->
+    process.stdout.write data
+
+  server.stderr.on 'data', (data)->
+    process.stderr.write data
+
+  server.on 'close', (code)->
+    console.log('server process exited with code ', code);
