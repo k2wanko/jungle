@@ -71,12 +71,23 @@ class FirstStage extends Stage
             jump_count = 0
           jump_count += 1
 
+    @enemy_charC = new Sprite(32,32);
+    @enemy_charC.image = core.assets['chara']
+    @enemy_charC.position =
+      x : 100
+      y : 100
+    @enemy_charC.addEventListener 'enterframe' , =>
+     if @enemy_charC.intersect(@main_char)
+       @scene.removeChild(@enemy_charC)
+        
+
     #画像の描写
     @scene.addChild(@floor_a)
     @scene.addChild(@floor_b)
     @scene.addChild(@main_char)
     @scene.addChild(@enemy_charA)
     @scene.addChild(@enemy_charB)
+    @scene.addChild(@enemy_charC)
     
     
     load = 1.7
@@ -89,6 +100,8 @@ class FirstStage extends Stage
               sprite.applyImpulse new b2Vec2((e.x - sprite.x) / load, (sprite.y - e.y) / load) 
               @touchcount++
               @ui.restart_button.visible = true
+
+
     
   #フレームごとの処理
   onPhysicsFrame: ->
