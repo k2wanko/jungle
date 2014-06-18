@@ -71,14 +71,17 @@ class FirstStage extends Stage
             jump_count = 0
           jump_count += 1
 
-    @enemy_charC = new Sprite(32,32);
-    @enemy_charC.image = core.assets['chara']
-    @enemy_charC.position =
-      x : 100
-      y : 100
-    @enemy_charC.addEventListener 'enterframe' , =>
-     if @enemy_charC.intersect(@main_char)
-       @scene.removeChild(@enemy_charC)
+    # @enemy_charC = new Sprite(32,32);
+    # @enemy_charC.image = core.assets['chara']
+    # @enemy_charC.x = 200
+    # @enemy_charC.y = 200
+    # @enemy_charC.addEventListener 'enterframe' , =>
+    #   if @enemy_charC.intersect "@main_char"
+    #     console.log "aaa"
+
+    # # @enemy_charC.addEventListener 'enterframe' , =>
+    #  if @enemy_charC.intersect(@main_char)
+    #    @scene.removeChild(@enemy_charC)
         
 
     #画像の描写
@@ -87,7 +90,7 @@ class FirstStage extends Stage
     @scene.addChild(@main_char)
     @scene.addChild(@enemy_charA)
     @scene.addChild(@enemy_charB)
-    @scene.addChild(@enemy_charC)
+    # @scene.addChild(@enemy_charC)
     
     
     load = 1.7
@@ -101,8 +104,8 @@ class FirstStage extends Stage
               @touchcount++
               @ui.restart_button.visible = true
 
-
-    
+    #Enemy Class から生成
+    ene = new Enemy 100 ,100 ,@scene, core
   #フレームごとの処理
   onPhysicsFrame: ->
   	if @main_char.x >= 100
